@@ -43,11 +43,15 @@ func main() {
 		fmt.Println("msg:", msg)
 	}
 	close(results)
+
+	//ch := make(chan int)
+	//close(ch)
+	//fmt.Println(<-ch)
 }
 
 //在main函数里面向无缓冲的channel发送数据或者接受数据都会导致deadlock！- 解决方法是使用另外一个goroutine对这个channel收或者发数据
 //在main函数里面向零值的而且有缓存的channel收数据会导致deadlock！- 解决方法是使用另外一个goroutine对这个channel发数据或者在main
 //里面给这个channel先发数据
 //为避免出现从channel中收数据时发生deadlock，最好使用select-case或者for i遍历去取channel中对应数量的数据
-
+//从一个已经关闭的通道中读取数据，不论该通道是有缓冲的还是无缓冲的，都会读取到该通道类型的零值
 //如果一个channel和另外一个channel关联了，关闭一个channel不会导致另外一个channel关闭
